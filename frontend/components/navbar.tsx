@@ -10,12 +10,12 @@ import {
   NavbarMenuToggle,
 } from "@heroui/navbar";
 import { Link } from "@heroui/link";
-import { link as linkStyles } from "@heroui/theme";
 import NextLink from "next/link";
+import { usePathname } from "next/navigation";
 import clsx from "clsx";
 
 import { siteConfig } from "@/config/site";
-import { Logo } from "@/components/icons";
+import { Logo } from "@/components/Icons";
 import useIsSmallScreen from "@/hooks/isUseSmallScreen";
 
 type NavItem = {
@@ -25,16 +25,16 @@ type NavItem = {
 
 export const Navbar = () => {
   const isSmallScreen = useIsSmallScreen();
+  const pathName = usePathname();
 
   const renderNavItems = (navItems: NavItem[]) => {
     return navItems.map((item) => (
       <NavbarItem key={item.href}>
         <NextLink
           className={clsx(
-            linkStyles({ color: "foreground" }),
-            "data-[active=true]:text-primary data-[active=true]:font-medium font-extrabold text-2xl",
+            "text-2xl font-bold",
+            item.href === pathName ? "text-secondary" : "text-foreground",
           )}
-          color="foreground"
           href={item.href}
         >
           {item.label}

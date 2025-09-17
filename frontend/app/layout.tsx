@@ -1,13 +1,14 @@
 import React from "react";
 import "@/styles/globals.css";
-import { Metadata, Viewport } from "next";
+import { Metadata } from "next";
 import clsx from "clsx";
 
 import { Providers } from "./providers";
 
 import { siteConfig } from "@/config/site";
 import { fontSans } from "@/config/fonts";
-import { Navbar } from "@/components/navbar";
+import { Navbar } from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: {
@@ -20,33 +21,32 @@ export const metadata: Metadata = {
   },
 };
 
-export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "white" },
-    { media: "(prefers-color-scheme: dark)", color: "black" },
-  ],
-};
-
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html suppressHydrationWarning lang="en">
+    <html className="dark" lang="en" style={{ colorScheme: "dark" }}>
       <body
+        suppressHydrationWarning
         className={clsx(
-          "min-h-screen text-foreground bg-background font-sans antialiased",
+          "min-h-screen text-foreground font-sans antialiased",
           fontSans.variable,
         )}
       >
-        <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
-          <div className="relative flex flex-col h-screen">
-            <Navbar />
-            <main className="container mx-auto max-w-4xl pt-16 px-6 flex-grow">
-              {children}
-            </main>
-            <footer className="w-full flex items-center justify-center py-3" />
+        <Providers themeProps={{ attribute: "class" }}>
+          <div className="flex flex-col">
+            <div className=" flex flex-col max-w-screen-lg mx-auto">
+              <Navbar />
+              <main className="container mx-auto max-w-screen-lg pt-16 flex-grow ">
+                {children}
+              </main>
+              <Footer />
+            </div>
+            <span className="bg-secondary w-full text-center text-primary">
+              © {new Date().getFullYear()} Book Digest. All rights reserved.
+            </span>
           </div>
         </Providers>
       </body>

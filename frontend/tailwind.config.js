@@ -15,45 +15,43 @@ const config = {
       },
     },
   },
-  darkMode: "class",
   plugins: [
     heroui({
       layout: {
-        dividerWeight: "1px", // h-divider the default height applied to the divider component
-        disabledOpacity: 0.5, // this value is applied as opacity-[value] when the component is disabled
+        dividerWeight: "1px",
+        disabledOpacity: 0.5,
         fontSize: {
-          tiny: "0.75rem", // text-tiny
-          small: "0.875rem", // text-small
-          medium: "1rem", // text-medium
-          large: "1.125rem", // text-large
+          tiny: "0.75rem",
+          small: "0.875rem",
+          medium: "1rem",
+          large: "1.125rem",
         },
         lineHeight: {
-          tiny: "1rem", // text-tiny
-          small: "1.25rem", // text-small
-          medium: "1.5rem", // text-medium
-          large: "1.75rem", // text-large
+          tiny: "1rem",
+          small: "1.25rem",
+          medium: "1.5rem",
+          large: "1.75rem",
         },
         radius: {
-          small: "8px", // rounded-small
-          medium: "12px", // rounded-medium
-          large: "14px", // rounded-large
+          small: "8px",
+          medium: "12px",
+          large: "14px",
         },
         borderWidth: {
-          small: "1px", // border-small
-          medium: "2px", // border-medium (default)
-          large: "3px", // border-large
+          small: "1px",
+          medium: "2px",
+          large: "3px",
         },
       },
       themes: {
         dark: {
           colors: {
-            background: "#153A7A", // bg-background
-            foreground: "#ffffff", // text-foreground
-            primary: "#153A7A", // bg-primary
-            secondary: "#FFA6C3", // bg-secondary
+            background: "#153A7A",
+            foreground: "#ffffff",
+            primary: "#153A7A",
+            secondary: "#FFA6C3",
             accent: "#f59e0b",
             neutral: "#1f2937",
-            "base-100": "#ffffff", // page base background
           },
         },
       },
