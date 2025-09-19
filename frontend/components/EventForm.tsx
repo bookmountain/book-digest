@@ -38,6 +38,8 @@ export default function EventForm({ eventId }: EventFormProps) {
   });
   const [errors, setErrors] = useState<ErrorType>({});
   const [submitted, setSubmitted] = useState<FormValues | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
 
   const validate = (values: FormValues) => {
     const newErrors: ErrorType = {};
@@ -64,7 +66,7 @@ export default function EventForm({ eventId }: EventFormProps) {
     setErrors((prev) => ({ ...prev, [name]: undefined }));
   };
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const newErrors = validate(formValues);
 
@@ -73,8 +75,65 @@ export default function EventForm({ eventId }: EventFormProps) {
 
       return;
     }
+
+    if (!eventId) {
+      setErrors({ email: "Event ID is missing" });
+
+      return;
+    }
+
     setErrors({});
-    setSubmitted(formValues);
+    setLoading(true);
+    setSuccessMessage("");
+
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/event-signups/`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            event: eventId,
+            first_name: formValues.firstName,
+            last_name: formValues.lastName,
+            age: Number(formValues.age),
+            profession: formValues.profession,
+            email: formValues.email,
+            instagram: formValues.instagram,
+            how_did_you_hear: formValues.howDidYouHear,
+            other_source: formValues.otherSource || "",
+          }),
+        },
+      );
+
+      if (!response.ok) {
+        const errorData = await response.json();
+
+        setErrors({ email: errorData?.email || "Failed to submit" });
+        setLoading(false);
+
+        return;
+      }
+
+      setSubmitted(formValues);
+      setSuccessMessage("Successfully registered!");
+      setFormValues({
+        firstName: "",
+        lastName: "",
+        age: "",
+        profession: "",
+        email: "",
+        instagram: "",
+        howDidYouHear: "",
+        otherSource: "",
+      });
+    } catch (err) {
+      setErrors({ email: "Network error. Please try again." });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -169,10 +228,18 @@ export default function EventForm({ eventId }: EventFormProps) {
           )
         }
       >
-        <SelectItem key="">Select an option</SelectItem>
-        <SelectItem key="Instagram">Instagram</SelectItem>
-        <SelectItem key="Facebook">Facebook</SelectItem>
-        <SelectItem key="Other">Other</SelectItem>
+        <SelectItem key="" className="text-gray-500">
+          Select an option
+        </SelectItem>
+        <SelectItem key="Instagram" className="text-gray-500">
+          Instagram
+        </SelectItem>
+        <SelectItem key="Facebook" className="text-gray-500">
+          Facebook
+        </SelectItem>
+        <SelectItem key="Other" className="text-gray-500">
+          Other
+        </SelectItem>
       </Select>
       {formValues.howDidYouHear === "Other" && (
         <Input
@@ -186,15 +253,20 @@ export default function EventForm({ eventId }: EventFormProps) {
           onValueChange={(v) => handleChange("otherSource", v)}
         />
       )}
+
       <div className="flex gap-4">
-        <Button className="w-full" color="secondary" type="submit">
-          SUBMIT
+        <Button
+          className="w-full"
+          color="secondary"
+          disabled={loading}
+          type="submit"
+        >
+          {loading ? "Submitting..." : "SUBMIT"}
         </Button>
       </div>
-      {submitted && (
-        <div className="text-small text-default-500 mt-4">
-          Submitted data: <pre>{JSON.stringify(submitted, null, 2)}</pre>
-        </div>
+
+      {successMessage && (
+        <div className="text-green-600 text-sm mt-4">{successMessage}</div>
       )}
     </Form>
   );
