@@ -39,7 +39,7 @@ export const WhyUs: React.FC<WhyUsProps> = () => {
 
   return (
     <section className="mx-auto px-4 py-8">
-      <h2 className="text-3xl font-bold mb-6 text-center">Why Us?</h2>
+      <h1 className="text-3xl font-bold mb-6 text-center">Why Us?</h1>
       <div className="relative flex flex-col md:flex-row items-center mb-12 p-6 h-96">
         <button
           aria-label="Previous"

@@ -1,28 +1,49 @@
-// app/books/page.tsx
-import Image from "next/image";
+"use client";
 
-type Book = {
-  id: number;
-  title: string;
-  author: string;
-  cover_image: string;
+import { useEffect, useState } from "react";
+import Image from "next/image";
+import { Button } from "@heroui/button";
+
+import { BookReview } from "@/types/data";
+import { fetchBooks } from "@/app/api";
+
+type BookListProps = {
+  limit?: number;
+  showLoadMore?: boolean;
 };
 
-async function getBooks(): Promise<Book[]> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/books/`, {
-    next: { revalidate: 60 }, // ISR
-  });
+export default function BookList({ limit = 5, showLoadMore }: BookListProps) {
+  const [books, setBooks] = useState<BookReview[]>([]);
+  const [offset, setOffset] = useState(0);
+  const [next, setNext] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
 
-  if (!res.ok) throw new Error("Failed to fetch books");
+  useEffect(() => {
+    if (books.length === 0) {
+      setLoading(true);
+      fetchBooks(limit, 0)
+        .then((data) => {
+          setBooks(data.results);
+          setNext(data.next);
+          setOffset(data.results.length);
+        })
+        .finally(() => setLoading(false));
+    }
+  }, [limit]);
 
-  return res.json();
-}
+  const loadMore = async () => {
+    if (!next) return;
+    setLoading(true);
+    const data = await fetchBooks(limit, offset);
 
-export default async function BookList() {
-  const books = await getBooks();
+    setBooks((prev) => [...prev, ...data.results]);
+    setOffset((prev) => prev + data.results.length);
+    setNext(data.next);
+    setLoading(false);
+  };
 
   return (
-    <section className="max-w-7xl mx-auto px-4 py-8">
+    <section className="flex flex-col justify-center max-w-7xl mx-auto px-4 py-8">
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {books.map((book) => (
           <div
@@ -34,9 +55,7 @@ export default async function BookList() {
                 fill
                 alt={book.title}
                 className="object-cover transition-transform duration-300 group-hover:scale-105"
-                sizes="(max-width: 768px) 50vw,
-                       (max-width: 1200px) 25vw,
-                       20vw"
+                sizes="(max-width: 768px) 50vw, (max-width: 1200px) 25vw, 20vw"
                 src={book.cover_image}
               />
             </div>
@@ -49,6 +68,20 @@ export default async function BookList() {
           </div>
         ))}
       </div>
+
+      {showLoadMore && next && (
+        <Button
+          className="rounded-3xl mx-auto my-8"
+          color="secondary"
+          disabled={loading}
+          variant="solid"
+          onClick={loadMore}
+        >
+          <span className="text-white text-lg">
+            {loading ? "Loading..." : "Load more"}
+          </span>
+        </Button>
+      )}
     </section>
   );
 }
