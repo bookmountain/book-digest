@@ -27,7 +27,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html className="dark" lang="en" style={{ colorScheme: "dark" }}>
+    <html suppressHydrationWarning className="default" lang="en">
       <body
         suppressHydrationWarning
         className={clsx(
@@ -35,7 +35,7 @@ export default function RootLayout({
           fontSans.variable,
         )}
       >
-        <Providers themeProps={{ attribute: "class" }}>
+        <Providers>
           <div className="flex flex-col">
             <div className=" flex flex-col max-w-screen-lg mx-auto">
               <Navbar />

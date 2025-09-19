@@ -2,6 +2,7 @@ import { heroui } from "@heroui/theme";
 
 /** @type {import("tailwindcss").Config} */
 const config = {
+  darkMode: false,
   content: [
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
@@ -44,7 +45,7 @@ const config = {
         },
       },
       themes: {
-        dark: {
+        default: {
           colors: {
             background: "#153A7A",
             foreground: "#ffffff",
