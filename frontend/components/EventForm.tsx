@@ -37,7 +37,6 @@ export default function EventForm({ eventId }: EventFormProps) {
     otherSource: "",
   });
   const [errors, setErrors] = useState<ErrorType>({});
-  const [submitted, setSubmitted] = useState<FormValues | null>(null);
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
 
@@ -117,7 +116,6 @@ export default function EventForm({ eventId }: EventFormProps) {
         return;
       }
 
-      setSubmitted(formValues);
       setSuccessMessage("Successfully registered!");
       setFormValues({
         firstName: "",
@@ -140,7 +138,6 @@ export default function EventForm({ eventId }: EventFormProps) {
     <Form
       className="flex flex-col gap-4"
       validationErrors={errors}
-      onReset={() => setSubmitted(null)}
       onSubmit={onSubmit}
     >
       <div className="w-full flex gap-4">

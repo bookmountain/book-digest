@@ -10,22 +10,24 @@ export default async function Join() {
 
   return (
     <section className="mx-auto p-4">
-      {events.map((event) => (
-        <div key={event.id} className="flex gap-8 mb-8">
-          <div className="basis-3/5">
-            <Image
-              alt={event.title}
-              className="w-full h-auto rounded mb-4"
-              src={event.image}
-              width={400}
-              height={300}
-            />
+      {events
+        .filter((event) => event.is_open)
+        .map((event) => (
+          <div key={event.id} className="flex gap-8 mb-8">
+            <div className="basis-3/5">
+              <Image
+                alt={event.title}
+                className="w-full h-auto rounded mb-4"
+                src={event.image}
+                width={400}
+                height={300}
+              />
+            </div>
+            <div className="basis-1/2">
+              <EventForm eventId={event.id} />
+            </div>
           </div>
-          <div className="basis-1/2">
-            <EventForm eventId={event.id} />
-          </div>
-        </div>
-      ))}
+        ))}
     </section>
   );
 }

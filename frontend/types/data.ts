@@ -16,4 +16,5 @@ export type Event = {
   region: "Taipei" | "Netherlands" | string; // extendable
   image: string;
   created_at: string;
+  is_open: boolean;
 };

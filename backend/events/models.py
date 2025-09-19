@@ -13,6 +13,7 @@ class Event(models.Model):
     region = models.CharField(max_length=255, choices=REGION_CHOICES, blank=True, null=True)
     image = models.ImageField(upload_to="events/%Y/%m")
     is_special = models.BooleanField(default=False)
+    is_open = models.BooleanField(default=True)  # <-- new field for availability
     created_at = models.DateTimeField(auto_now_add=True)
 
     def delete(self, *args, **kwargs):
