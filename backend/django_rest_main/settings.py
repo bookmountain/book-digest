@@ -39,7 +39,7 @@ SECRET_KEY = "django-insecure-)mvm$1nj#02ek*qc2g35x*qjq1ymyv0=uew+w$8c9u%6vn0h%h
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["book-digest.onrender.com"]
 
 # Application definition
 
