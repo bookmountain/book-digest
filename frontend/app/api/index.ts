@@ -21,3 +21,23 @@ export async function fetchBooks(
 
   return res.json();
 }
+
+export async function fetchBook(id: number): Promise<BookReview> {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/books/${id}/`,
+  );
+
+  if (!res.ok) throw new Error("Failed to fetch book");
+
+  return res.json();
+}
+
+export async function fetchOpenEvents(): Promise<Event[]> {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/events/?is_open=true`,
+  );
+
+  if (!res.ok) throw new Error("Failed to fetch open events");
+
+  return res.json();
+}

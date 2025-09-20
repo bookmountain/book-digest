@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Button } from "@heroui/button";
+import { useRouter } from "next/navigation";
 
 import { BookReview } from "@/types/data";
 import { fetchBooks } from "@/app/api";
@@ -17,6 +18,7 @@ export default function BookList({ limit = 5, showLoadMore }: BookListProps) {
   const [offset, setOffset] = useState(0);
   const [next, setNext] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     if (books.length === 0) {
@@ -49,6 +51,14 @@ export default function BookList({ limit = 5, showLoadMore }: BookListProps) {
           <div
             key={book.id}
             className="relative group rounded overflow-hidden shadow-lg"
+            role="button"
+            tabIndex={0}
+            onClick={() => router.push(`/books/${book.id}`)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                router.push(`/books/${book.id}`);
+              }
+            }}
           >
             <div className="relative w-full aspect-[3/4]">
               <Image

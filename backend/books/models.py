@@ -1,11 +1,12 @@
 from django.db import models
+from ckeditor.fields import RichTextField
 
 
 class BookReview(models.Model):
     title = models.CharField(max_length=255)
     author = models.CharField(max_length=255)
     published_date = models.DateField()
-    review_content = models.TextField()  # markdown or html
+    review_content = RichTextField()  # markdown or html
     cover_image = models.ImageField(upload_to='covers/')
     created_at = models.DateTimeField(auto_now_add=True)
 
