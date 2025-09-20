@@ -1,8 +1,7 @@
 import React from "react";
 import Image from "next/image";
 
-import { fetchEvents } from "../api";
-
+import { fetchEvents } from "@/app/api";
 import EventForm from "@/components/EventForm";
 
 export default async function Join() {

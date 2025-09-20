@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 
-import { SlideSvg1, SlideSvg2, SlideSvg3 } from "./Icons";
+import { SlideSvg1, SlideSvg2, SlideSvg3 } from "@/components/Icons";
 
 type WhyUsProps = {};
 

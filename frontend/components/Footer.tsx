@@ -1,6 +1,6 @@
 import React from "react";
 
-import { FooterLogo } from "./Icons";
+import { FooterLogo } from "@/components/Icons";
 
 const Footer: React.FC = () => {
   const columns = [

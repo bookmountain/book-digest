@@ -2,8 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@heroui/button";
 
-import { fetchBooks, fetchEvents } from "../api";
-
+import { fetchBooks, fetchEvents } from "@/app/api";
 import CountUp from "@/components/CountUp";
 
 export default async function Events() {
