@@ -5,6 +5,8 @@ import { Button } from "@heroui/button";
 import { fetchBooks, fetchEvents } from "@/app/api";
 import CountUp from "@/components/CountUp";
 
+export const revalidate = 60;
+
 export default async function Events() {
   const books = await fetchBooks();
   const events = await fetchEvents();

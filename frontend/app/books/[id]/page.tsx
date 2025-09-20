@@ -8,7 +8,6 @@ type BookPageProps = {
   params: Params;
 };
 
-// Revalidate each page every 60s
 export const revalidate = 60;
 
 export default async function BookPage(props: BookPageProps) {
