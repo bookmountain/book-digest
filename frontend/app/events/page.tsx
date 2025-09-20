@@ -60,11 +60,11 @@ export default async function Events() {
               />
             </div>
             <div className="flex flex-col justify-center items-center w-full md:basis-3/5">
-              <div className="w-4/5">
+              <div className="w-full md:w-4/5">
                 <h3 className="text-4xl font-semibold mb-2">{event.title}</h3>
                 <p className="mb-2 text-xl">{event.description}</p>
-                <p className="text-md  mb-1">{event.event_date}</p>
-                <p className="text-md ">{event.region}</p>
+                <p className="text-md mb-1">{event.event_date}</p>
+                <p className="text-md">{event.region}</p>
                 <Link passHref href="/join">
                   <Button className="self-start mt-4" color="secondary">
                     SIGN UP
