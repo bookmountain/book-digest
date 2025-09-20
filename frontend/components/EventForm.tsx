@@ -177,7 +177,7 @@ export default function EventForm({ eventId }: EventFormProps) {
         <Input
           isRequired
           errorMessage={errors.profession}
-          label="Your Profession / Occupation"
+          label="Profession / Occupation"
           labelPlacement="outside"
           name="profession"
           placeholder="What do you do?"

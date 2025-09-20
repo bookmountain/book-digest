@@ -47,8 +47,8 @@ export default function Navbar() {
     <HeroUINavbar
       className="bg-background"
       height={"10rem"}
-      maxWidth="xl"
-      position="sticky"
+      maxWidth="lg"
+      position="static"
     >
       {!isSmallScreen && (
         <NavbarContent className="basis-1/5 sm:basis-full" justify="center">

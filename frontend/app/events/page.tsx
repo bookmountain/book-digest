@@ -23,8 +23,8 @@ export default async function Events() {
   ];
 
   return (
-    <section>
-      <div className="flex flex-row justify-around items-center gap-16 mb-16">
+    <section className="px-4">
+      <div className="flex flex-col sm:flex-row flex-wrap justify-around items-center gap-8 sm:gap-16 mb-16">
         {statics.map((stat) => (
           <div
             key={stat.title}
@@ -43,8 +43,14 @@ export default async function Events() {
       </div>
       <div className="flex flex-col gap-8 mb-16">
         {events.map((event) => (
-          <div key={event.id} className="flex items-start">
-            <div suppressHydrationWarning className="basis-2/5 mr-6">
+          <div
+            key={event.id}
+            className="flex flex-col md:flex-row items-start gap-6"
+          >
+            <div
+              suppressHydrationWarning
+              className="w-full md:basis-2/5 md:mr-6"
+            >
               <Image
                 alt={event.title}
                 className="w-full h-auto rounded mr-6 flex-shrink-0"
@@ -53,7 +59,7 @@ export default async function Events() {
                 height={200}
               />
             </div>
-            <div className="flex flex-col justify-center items-center basis-3/5">
+            <div className="flex flex-col justify-center items-center w-full md:basis-3/5">
               <div className="w-4/5">
                 <h3 className="text-4xl font-semibold mb-2">{event.title}</h3>
                 <p className="mb-2 text-xl">{event.description}</p>

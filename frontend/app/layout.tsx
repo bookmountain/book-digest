@@ -38,7 +38,7 @@ export default function RootLayout({
           <div className="flex flex-col">
             <div className=" flex flex-col max-w-screen-lg mx-auto">
               <Navbar />
-              <main className="container mx-auto max-w-screen-lg pt-16 flex-grow ">
+              <main className="container mx-auto pt-16 flex-grow ">
                 {children}
               </main>
               <Footer />
