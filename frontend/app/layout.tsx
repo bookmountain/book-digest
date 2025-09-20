@@ -42,9 +42,11 @@ export default function RootLayout({
             </main>
             <Footer />
           </div>
-          <span className="bg-secondary w-full text-center text-primary">
-            © {new Date().getFullYear()} Book Digest. All rights reserved.
-          </span>
+          <div className="flex ">
+            <span className="bg-secondary w-full text-center text-primary">
+              © {new Date().getFullYear()} Book Digest. All rights reserved.
+            </span>
+          </div>
         </Providers>
       </body>
     </html>

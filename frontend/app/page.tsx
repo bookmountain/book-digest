@@ -38,7 +38,7 @@ export default function Home() {
           />
         </div>
       </section>
-      <BookList />
+      <BookList limit={20} />
       <WhyUs />
     </>
   );

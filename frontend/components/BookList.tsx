@@ -1,64 +1,24 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import Image from "next/image";
-import { Button } from "@heroui/button";
-import { useRouter } from "next/navigation";
 
 import { BookReview } from "@/types/data";
 import { fetchBooks } from "@/app/api";
 
 type BookListProps = {
   limit?: number;
-  showLoadMore?: boolean;
 };
 
-export default function BookList({ limit = 5, showLoadMore }: BookListProps) {
-  const [books, setBooks] = useState<BookReview[]>([]);
-  const [offset, setOffset] = useState(0);
-  const [next, setNext] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
-  const router = useRouter();
-
-  useEffect(() => {
-    if (books.length === 0) {
-      setLoading(true);
-      fetchBooks(limit, 0)
-        .then((data) => {
-          setBooks(data.results);
-          setNext(data.next);
-          setOffset(data.results.length);
-        })
-        .finally(() => setLoading(false));
-    }
-  }, [limit]);
-
-  const loadMore = async () => {
-    if (!next) return;
-    setLoading(true);
-    const data = await fetchBooks(limit, offset);
-
-    setBooks((prev) => [...prev, ...data.results]);
-    setOffset((prev) => prev + data.results.length);
-    setNext(data.next);
-    setLoading(false);
-  };
+export default async function BookList({ limit = 5 }: BookListProps) {
+  const data = await fetchBooks(limit, 0);
+  const books: BookReview[] = data.results;
 
   return (
     <section className="flex flex-col justify-center max-w-7xl mx-auto px-4 py-8">
       <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
         {books.map((book) => (
-          <div
+          <a
             key={book.id}
             className="relative group rounded overflow-hidden shadow-lg"
-            role="button"
-            tabIndex={0}
-            onClick={() => router.push(`/books/${book.id}`)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" || e.key === " ") {
-                router.push(`/books/${book.id}`);
-              }
-            }}
+            href={`/books/${book.id}`}
           >
             <div className="relative w-full aspect-[3/4]">
               <Image
@@ -75,23 +35,9 @@ export default function BookList({ limit = 5, showLoadMore }: BookListProps) {
               </h2>
               <p className="text-gray-200 text-sm">{book.author}</p>
             </div>
-          </div>
+          </a>
         ))}
       </div>
-
-      {showLoadMore && next && (
-        <Button
-          className="rounded-3xl mx-auto my-8"
-          color="secondary"
-          disabled={loading}
-          variant="solid"
-          onClick={loadMore}
-        >
-          <span className="text-white text-lg">
-            {loading ? "Loading..." : "Load more"}
-          </span>
-        </Button>
-      )}
     </section>
   );
 }
