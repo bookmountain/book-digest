@@ -1,7 +1,6 @@
 import Image from "next/image";
 
-import { fetchBook, fetchBooks } from "@/app/api";
-import { BookReview } from "@/types/data";
+import { fetchBook } from "@/app/api";
 
 type Params = Promise<{ id: string }>;
 
@@ -9,13 +8,8 @@ type BookPageProps = {
   params: Params;
 };
 
-export async function generateStaticParams() {
-  const data = await fetchBooks(1000, 0);
-
-  return data.results.map((book: BookReview) => ({
-    id: String(book.id),
-  }));
-}
+// Revalidate each page every 60s
+export const revalidate = 60;
 
 export default async function BookPage(props: BookPageProps) {
   const params = await props.params;
