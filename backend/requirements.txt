@@ -2,7 +2,9 @@ asgiref==3.9.1
 boto3==1.40.4
 botocore==1.40.4
 Django==4.2.23
+django-ckeditor==6.7.3
 django-cors-headers==4.7.0
+django-js-asset==2.2.0
 django-storages==1.14.6
 djangorestframework==3.16.1
 jmespath==1.0.1
