@@ -35,18 +35,16 @@ export default function RootLayout({
         )}
       >
         <Providers>
-          <div className="flex flex-col">
-            <div className=" flex flex-col max-w-screen-lg mx-auto">
-              <Navbar />
-              <main className="container mx-auto pt-16 flex-grow ">
-                {children}
-              </main>
-              <Footer />
-            </div>
-            <span className="bg-secondary w-full text-center text-primary">
-              © {new Date().getFullYear()} Book Digest. All rights reserved.
-            </span>
+          <div className=" flex flex-col max-w-screen-lg mx-auto">
+            <Navbar />
+            <main className="container mx-auto pt-16 flex-grow ">
+              {children}
+            </main>
+            <Footer />
           </div>
+          <span className="bg-secondary w-full text-center text-primary">
+            © {new Date().getFullYear()} Book Digest. All rights reserved.
+          </span>
         </Providers>
       </body>
     </html>
