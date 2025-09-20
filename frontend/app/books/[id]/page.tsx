@@ -1,12 +1,21 @@
 import Image from "next/image";
 
-import { fetchBook } from "@/app/api";
+import { fetchBook, fetchBooks } from "@/app/api";
+import { BookReview } from "@/types/data";
 
 type Params = Promise<{ id: string }>;
 
 type BookPageProps = {
   params: Params;
 };
+
+export async function generateStaticParams() {
+  const data = await fetchBooks(1000, 0);
+
+  return data.results.map((book: BookReview) => ({
+    id: String(book.id),
+  }));
+}
 
 export default async function BookPage(props: BookPageProps) {
   const params = await props.params;
@@ -21,7 +30,7 @@ export default async function BookPage(props: BookPageProps) {
         </div>
         <div className="flex flex-col">
           <h1 className="text-4xl font-bold mb-2">{title}</h1>
-          <h2 className="text-2xl ">{author}</h2>
+          <h2 className="text-2xl">{author}</h2>
           <p className="text-md">{published_date}</p>
         </div>
       </div>
