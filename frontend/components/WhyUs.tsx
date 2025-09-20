@@ -40,10 +40,10 @@ export const WhyUs: React.FC<WhyUsProps> = () => {
   return (
     <section className="mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-6 text-center">Why Us?</h1>
-      <div className="relative flex flex-col md:flex-row items-center mb-12 p-6 h-96">
+      <div className="relative flex flex-col md:flex-row items-center mb-12 p-4 md:p-6 h-auto md:h-96">
         <button
           aria-label="Previous"
-          className="absolute left-2 top-1/2 -translate-y-1/2 hover:bg-secondary rounded-full p-2"
+          className="absolute left-2 top-1/2 -translate-y-1/2 hover:bg-secondary rounded-full p-2 z-10"
           onClick={prevSlide}
         >
           <span className="sr-only">Previous</span>
@@ -57,21 +57,23 @@ export const WhyUs: React.FC<WhyUsProps> = () => {
             <path d="M15 19l-7-7 7-7" />
           </svg>
         </button>
-        <SlideIcon className="basis-1/3 mx-auto" />
+        <div className="flex flex-col items-center w-full md:w-auto md:basis-1/3">
+          <SlideIcon className="w-64 h-64 xl:w-128 xl:h-128 mx-auto" />
+        </div>
         <div
           suppressHydrationWarning
-          className="md:ml-6 mt-4 md:mt-0 text-center md:text-left basis-2/3"
+          className="md:ml-6 mt-4 md:mt-0 text-center md:text-left w-full md:basis-2/3"
         >
-          <h3 className="text-2xl font-semibold mb-4">
+          <h3 className="text-xl md:text-2xl font-semibold mb-4">
             {slides[current].title}
           </h3>
-          <p className="text-lg whitespace-pre-line">
+          <p className="text-base md:text-lg whitespace-pre-line">
             {slides[current].description}
           </p>
         </div>
         <button
           aria-label="Next"
-          className="absolute right-2 top-1/2 -translate-y-1/2  hover:bg-secondary rounded-full p-2"
+          className="absolute right-2 top-1/2 -translate-y-1/2 hover:bg-secondary rounded-full p-2 z-10"
           onClick={nextSlide}
         >
           <span className="sr-only">Next</span>

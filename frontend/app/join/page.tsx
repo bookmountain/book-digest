@@ -13,7 +13,7 @@ export default async function Join() {
       {events
         .filter((event) => event.is_open)
         .map((event) => (
-          <div key={event.id} className="flex gap-8 mb-8">
+          <div key={event.id} className="flex sm:flex-row flex-col gap-8 mb-8">
             <div className="basis-3/5">
               <Image
                 alt={event.title}
