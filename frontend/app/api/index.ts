@@ -15,6 +15,7 @@ export async function fetchBooks(
 ): Promise<IPaginatedResponse<BookReview>> {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/books/?limit=${limit}&offset=${offset}`,
+    { next: { revalidate: 60 } },
   );
 
   if (!res.ok) throw new Error("Failed to fetch books");
@@ -25,6 +26,7 @@ export async function fetchBooks(
 export async function fetchBook(id: number): Promise<BookReview> {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/books/${id}/`,
+    { next: { revalidate: 60 } },
   );
 
   if (!res.ok) throw new Error("Failed to fetch book");
@@ -35,6 +37,7 @@ export async function fetchBook(id: number): Promise<BookReview> {
 export async function fetchOpenEvents(): Promise<Event[]> {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/events/?is_open=true`,
+    { next: { revalidate: 60 } },
   );
 
   if (!res.ok) throw new Error("Failed to fetch open events");

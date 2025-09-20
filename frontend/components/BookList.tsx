@@ -7,6 +7,9 @@ type BookListProps = {
   limit?: number;
 };
 
+// Revalidate each page every 60s
+export const revalidate = 60;
+
 export default async function BookList({ limit = 5 }: BookListProps) {
   const data = await fetchBooks(limit, 0);
   const books: BookReview[] = data.results;
