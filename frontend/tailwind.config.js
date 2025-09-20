@@ -2,7 +2,7 @@ import { heroui } from "@heroui/theme";
 
 /** @type {import("tailwindcss").Config} */
 const config = {
-  darkMode: false,
+  darkMode: "media",
   content: [
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",

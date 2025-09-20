@@ -2,11 +2,14 @@ import Image from "next/image";
 
 import { fetchBook } from "@/app/api";
 
+type Params = Promise<{ id: string }>;
+
 type BookPageProps = {
-  params: { id: string };
+  params: Params;
 };
 
-export default async function BookPage({ params }: BookPageProps) {
+export default async function BookPage(props: BookPageProps) {
+  const params = await props.params;
   const book = await fetchBook(Number(params.id));
   const { title, author, review_content, cover_image, published_date } = book;
 
