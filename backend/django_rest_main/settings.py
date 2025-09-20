@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os
+import dj_database_url
 from pathlib import Path
 from dotenv import load_dotenv
 
@@ -39,7 +40,7 @@ SECRET_KEY = "django-insecure-)mvm$1nj#02ek*qc2g35x*qjq1ymyv0=uew+w$8c9u%6vn0h%h
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["book-digest.onrender.com"]
+ALLOWED_HOSTS = ["book-digest.onrender.com", "localhost"]
 
 # Application definition
 
@@ -100,15 +101,9 @@ WSGI_APPLICATION = "django_rest_main.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'bookdigest_db',
-        'USER': 'bookdigest_admin',
-        'PASSWORD': 'haha.0801',
-        'HOST': 'localhost',
-        'PORT': '5432',  # default PostgreSQL port
-    }
+    "default": dj_database_url.config(default=os.getenv("DATABASE_URL"))
 }
 
 # Password validation
