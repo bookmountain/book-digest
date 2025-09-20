@@ -25,9 +25,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
 AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
 AWS_STORAGE_BUCKET_NAME = os.getenv("AWS_STORAGE_BUCKET_NAME")
-AWS_S3_ENDPOINT_URL = os.getenv("AWS_S3_ENDPOINT_URL")
+AWS_S3_ENDPOINT_URL = os.getenv("AWS_S3_ENDPOINT_URL")  # for uploads
 AWS_S3_SIGNATURE_VERSION = "s3v4"  # force SigV4
 AWS_S3_FILE_OVERWRITE = False  # optional: don’t overwrite files with same name
+
+# tell django-storages to serve via your public R2 domain
+AWS_S3_CUSTOM_DOMAIN = os.getenv("AWS_R2_PUBLIC_URL")
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
