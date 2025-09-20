@@ -1,4 +1,4 @@
-import { WhyUs } from "@/components/WhyUs";
+import WhyUs from "@/components/WhyUs";
 
 export default function About() {
   return (

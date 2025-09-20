@@ -2,9 +2,9 @@
 
 import React, { useState } from "react";
 
-import { SlideSvg1, SlideSvg2, SlideSvg3 } from "@/components/Icons";
-
-type WhyUsProps = {};
+import SlideSvg1 from "./icons/SlideSvg1";
+import SlideSvg2 from "./icons/SlideSvg2";
+import SlideSvg3 from "./icons/SlideSvg3";
 
 const slides = [
   {
@@ -27,7 +27,7 @@ const slides = [
   },
 ];
 
-export const WhyUs: React.FC<WhyUsProps> = () => {
+export default function WhyUs() {
   const [current, setCurrent] = useState(0);
 
   const prevSlide = () =>
@@ -100,4 +100,4 @@ export const WhyUs: React.FC<WhyUsProps> = () => {
       </div>
     </section>
   );
-};
+}

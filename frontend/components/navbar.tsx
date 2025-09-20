@@ -15,7 +15,7 @@ import { usePathname } from "next/navigation";
 import clsx from "clsx";
 
 import { siteConfig } from "@/config/site";
-import { Logo } from "@/components/Icons";
+import Logo from "@/components/icons/Logo";
 import useIsSmallScreen from "@/hooks/isUseSmallScreen";
 
 type NavItem = {
@@ -23,7 +23,7 @@ type NavItem = {
   href: string;
 };
 
-export const Navbar = () => {
+export default function Navbar() {
   const isSmallScreen = useIsSmallScreen();
   const pathName = usePathname();
 
@@ -79,7 +79,7 @@ export const Navbar = () => {
       </NavbarMenu>
     </HeroUINavbar>
   );
-};
+}
 
 const NavbarLogo = () => {
   return (

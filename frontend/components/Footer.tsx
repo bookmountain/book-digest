@@ -1,8 +1,8 @@
 import React from "react";
 
-import { FooterLogo } from "@/components/Icons";
+import FooterLogo from "@/components/icons/FooterLogo";
 
-const Footer: React.FC = () => {
+export default function Footer() {
   const columns = [
     {
       title: "Events",
@@ -72,6 +72,4 @@ const Footer: React.FC = () => {
       </div>
     </footer>
   );
-};
-
-export default Footer;
+}

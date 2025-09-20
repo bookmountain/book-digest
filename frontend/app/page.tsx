@@ -2,7 +2,7 @@ import Image from "next/image";
 import { Button } from "@heroui/button";
 
 import BookList from "@/components/BookList";
-import { WhyUs } from "@/components/WhyUs";
+import WhyUs from "@/components/WhyUs";
 
 export default function Home() {
   return (
